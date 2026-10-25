@@ -3,7 +3,7 @@ import json, sys
 from xml.sax.saxutils import escape
 
 caps = json.load(open(sys.argv[1]))
-out_xml, out_srt = sys.argv[2], sys.argv[3]
+out_xml = sys.argv[2]
 FPS, W, H = 60, 1080, 1920
 MASTER_FRAMES, END = 691, 811
 
@@ -74,12 +74,3 @@ xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE xmeml>\n<xmeml version
        "</audio></media></sequence></xmeml>\n")
 open(out_xml, "w", encoding="utf-8").write(xml)
 
-def tc(f):
-    ms = round(f * 1000 / FPS)
-    return f"{ms // 3600000:02}:{ms // 60000 % 60:02}:{ms // 1000 % 60:02},{ms % 1000:03}"
-
-srt = []
-for i, c in enumerate(caps, 1):
-    text = "\n".join(l for l, _ in c["lines"])
-    srt.append(f"{i}\n{tc(c['start'])} --> {tc(c['end'])}\n{text}\n")
-open(out_srt, "w", encoding="utf-8").write("\n".join(srt))
