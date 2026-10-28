@@ -1,0 +1,60 @@
+{
+  "clinic": "ひだまり歯科クリニック",
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1_hook", "dur": 4.0, "art": "worried", "bg": ["#BFE9F2", "#E8F8FB"],
+      "label": null,
+      "lines": [["歯医者さん、", 104], ["ちょっと苦手…？", 104]],
+      "accent": 1,
+      "narration": "歯医者さん、ちょっと苦手…と感じていませんか？"
+    },
+    {
+      "id": "s2_clinic", "dur": 5.0, "art": "clinic", "bg": ["#C9F0E4", "#F1FBF7"],
+      "label": "〇〇駅から徒歩3分",
+      "lines": [["ひだまり", 120], ["歯科クリニック", 104]],
+      "accent": 0,
+      "narration": "〇〇駅から徒歩3分、ひだまり歯科クリニックです。"
+    },
+    {
+      "id": "s3_gentle", "dur": 7.0, "art": "gentle", "bg": ["#FFE1E4", "#FFF5F5"],
+      "label": "POINT 1",
+      "lines": [["痛みに配慮した", 100], ["やさしい治療", 112]],
+      "accent": 1,
+      "narration": "表面麻酔や細い針を使い、できるだけ痛みの少ない治療を心がけています。"
+    },
+    {
+      "id": "s4_counseling", "dur": 7.0, "art": "counseling", "bg": ["#FFF0C7", "#FFFBEE"],
+      "label": "POINT 2",
+      "lines": [["しっかり話を聞く", 96], ["カウンセリング", 108]],
+      "accent": 1,
+      "narration": "治療の前には、お悩みやご希望をじっくりお聞きします。"
+    },
+    {
+      "id": "s5_kids", "dur": 7.0, "art": "kids", "bg": ["#E3E6FF", "#F6F7FF"],
+      "label": "POINT 3",
+      "lines": [["キッズスペースで", 96], ["お子さまも安心", 108]],
+      "accent": 1,
+      "narration": "キッズスペースがあるので、お子さま連れでも安心です。"
+    },
+    {
+      "id": "s6_prevent", "dur": 7.0, "art": "prevent", "bg": ["#CDEFFF", "#F0FAFF"],
+      "label": "POINT 4",
+      "lines": [["予防歯科・", 100], ["クリーニング", 112]],
+      "accent": 1,
+      "narration": "定期的なクリーニングで、むし歯や歯周病を予防しましょう。"
+    },
+    {
+      "id": "s7_info", "dur": 8.0, "art": "info", "bg": ["#BDEBE0", "#EEFAF6"],
+      "label": null,
+      "lines": [],
+      "accent": null,
+      "info": {
+        "rows": [["診療時間", "9:00〜18:30"], ["土曜も診療", "休診 日・祝"], ["アクセス", "〇〇駅 徒歩3分"]],
+        "cta": "Web予約 24時間受付中",
+        "sub": "▶ プロフィールのリンクから"
+      },
+      "narration": "ご予約はWebから24時間受付中。お気軽にご来院ください。"
+    }
+  ]
+}
