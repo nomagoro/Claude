@@ -8,6 +8,7 @@ Outputs
     media/scenes/<id>.mp4         per-scene background clips without telops (for editing)
     media/telop/<id>.png          per-scene telops as transparent 1080x1920 PNG
     media/audio/bgm.wav, pop.wav  music and sound effect
+    dental_intro_premiere.xml     Premiere Pro project (bins + sequence), via build_xml.py
 
 Free stock footage: drop a file named after the scene id into media/stock/
 (e.g. media/stock/s3_gentle.mp4 or s3_gentle.jpg) and that scene uses it instead
@@ -309,6 +310,7 @@ def main():
     json.dump({"fps": FPS, "total": total, "scenes": timeline, "pops": pops},
               open("media/timeline.json", "w"), indent=1)
     write_srt(timeline)
+    subprocess.run([sys.executable, "tools/build_xml.py"], check=True)
     print("done:", total, "sec")
 
 
