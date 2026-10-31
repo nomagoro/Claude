@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<LoudnessReport Version="1">
+	<Settings>
+		<LoudnessTolerance>2</LoudnessTolerance>
+		<MaxTruePeakLevel>-1</MaxTruePeakLevel>
+		<TargetLoudness>-16</TargetLoudness>
+		<TruePeakLimiter>
+			<LookAheadTime>12</LookAheadTime>
+			<ReleaseTime>200</ReleaseTime>
+		</TruePeakLimiter>
+	</Settings>
+	<Streams>
+		<Stream ChannelCount="2" Index="0" Processed="true">
+			<Channels>
+				<Channel Index="0">
+					<TruePeak>
+						<Normalized>-3.97760844231</Normalized>
+						<Source>-6.32033586502</Source>
+					</TruePeak>
+				</Channel>
+				<Channel Index="1">
+					<TruePeak>
+						<Normalized>-3.97760844231</Normalized>
+						<Source>-6.32033586502</Source>
+					</TruePeak>
+				</Channel>
+			</Channels>
+			<Loudness>
+				<Normalized>-16.0000076294</Normalized>
+				<Source>-18.3427276611</Source>
+			</Loudness>
+		</Stream>
+	</Streams>
+</LoudnessReport>
