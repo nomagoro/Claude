@@ -8,6 +8,41 @@
 > 動画内にも「架空の動物病院／紹介動画サンプル」と明記しています。電話番号・診療時間・休診日は載せていません。
 > 素材や設定で確認できない専門性・設備・診療実績・効果は書いていません。
 
+## テロップ再設計版（最新）
+
+修正版のテロップをデザインから作り直した版です。映像・色調整・BGM・尺は修正版と同じで、変えたのはテロップとシェパードの構図だけです。
+
+| ファイル | 内容 |
+|---|---|
+| `ごろう動物病院_紹介ショート_テロップ再設計.prproj` | テロップ再設計版の Premiere Pro プロジェクト（修正版を別名保存して差し替え） |
+| `ごろう動物病院_紹介ショート_テロップ再設計.mp4` | 書き出した動画（H.264 / 1080×1920 / 30fps / 30秒） |
+| `ごろう動物病院_紹介ショート_テロップ再設計_LoudnessReport.xml` | ラウドネス測定結果（−16.0 LUFS／トゥルーピーク −4.0 dBTP。修正版と同じ） |
+| `ごろう動物病院_テロップ再設計_5場面.png` | 冒頭・診察・犬・猫・エンドの静止画を並べた確認用画像（書き出した MP4 から抜き出し） |
+| `media/goro_r0*.png` | テロップ画像（`tools/make_telops_redesign.ps1` で作成） |
+| `fonts/NotoSansJP-VF.ttf` | テロップの書体 Noto Sans JP（SIL OFL）。スクリプトを動かすときは Windows にインストールしておく |
+
+### デザイン
+- クリーム色の角丸パネル・コーラルの枠・強い影はやめ、**白文字・左揃え**に変更
+- 書体は Noto Sans JP（丸みの少ないゴシック）。メッセージは SemiBold、病院名は Bold、一言と注記は Medium
+- 強調は文字の大きさと太さだけで行う（囲み枠・線・アイコンなし）。文字の周りにはごく薄いにじみだけ入れて読みやすくしています
+- 明るい場面だけ、画面の端に薄い黒のグラデーションを敷く（診察・猫の場面は下側、冒頭は上側）。エンドカードは映像全体を少し暗くする
+
+### 配置のルール
+| 種類 | 場面 | 位置・文字組み |
+|---|---|---|
+| メッセージ | 診察・犬・猫 | 左端 x=90、文字の下端 y=1420、SemiBold 72px、行送り1.6倍、2行（y=1241〜1420）。3場面とも同じ位置 |
+| タイトル | 冒頭・エンドカード | 左端 x=90、上側（y=270〜518）。注記 36px → 病院名 Bold 104px → 一言 52px |
+
+- 右側は x=900 より内側（右180pxは空ける）。下20%と上160pxにも入れない
+- 冒頭の猫とエンドの秋田犬は顔が画面の下側にあり、下の位置だと顔に重なるため、タイトルだけ上に置いています
+- 冒頭は病院名を先に出し、一言「大切な家族の、いつもの相談先。」を0.5秒かけてフェードインで後から出す
+- シェパードのカットは手元がメッセージに重なっていたため、テロップを動かさず映像側を調整しました（スケール 75% → **90%**、位置Y 960 → **768**。元素材 1440×2560 なので拡大にはなりません）
+
+### 確認したこと
+- 書き出した MP4 から約1〜2秒おき＋切り替わりの前後を静止画にして確認：文字切れなし、犬猫の目・顔、診察の手元とメッセージの重なりなし
+- メッセージの位置は診察→犬→猫で変わらず、文字の位置が上下に動くのは冒頭とエンドカードのタイトルだけ
+- スマホ相当（幅390px）に縮めた画像で、注記（36px）まで拡大せずに読めることを確認
+
 ## ファイル
 
 | ファイル | 内容 |
@@ -97,7 +132,8 @@ XML には色調整と構図の位置調整は入りません（スケールの�
 4. このリポジトリと同じ形にする場合は、素材を `media/` に移してから .prproj を開き、「メディアをリンク」で `media/` を指定して保存します
 
 ## テロップを差し替える
-- `tools/make_telops.ps1` の文言を書き換えて実行すると `media/goro_t*.png` が作り直されます
+- テロップ再設計版は `tools/make_telops_redesign.ps1`（`media/goro_r0*.png` を作成。Noto Sans JP のインストールが必要）
+- 修正版は `tools/make_telops.ps1` の文言を書き換えて実行すると `media/goro_t*.png` が作り直されます
   ```
   powershell -ExecutionPolicy Bypass -File tools\make_telops.ps1
   ```
@@ -119,7 +155,8 @@ XML には色調整と構図の位置調整は入りません（スケールの�
 | `media/bgm_happy_ukulele_512480.mp3` | Happy Ukulele | [BombinSound](https://pixabay.com/users/bombinsound-54782632/) | https://pixabay.com/music/happy-childrens-tunes-happy-ukulele-512480/ | Pixabay Content License | 両方 |
 | `media/02_tokyo_street_35306935.mp4` | Peaceful Suburban Street in Tokyo | [Miltan Monjib](https://www.pexels.com/@miltan-monjib-204165102) | https://www.pexels.com/video/peaceful-suburban-street-in-tokyo-35306935/ | Pexels License | 前の版のみ |
 | `media/03_stethoscope_6235191_uhd.mp4` | Veterinarian Listening Heart Of Small Dog With Stethoscope | [Tima Miroshnichenko](https://www.pexels.com/@tima-miroshnichenko) | https://www.pexels.com/video/veterinarian-listening-heart-of-small-dog-with-stethoscope-6235191/ | Pexels License | 前の版のみ |
-| `fonts/MPLUSRounded1c-ExtraBold.ttf` | M PLUS Rounded 1c | M+ FONTS PROJECT | https://fonts.google.com/specimen/M+PLUS+Rounded+1c | SIL Open Font License 1.1 | 両方 |
+| `fonts/MPLUSRounded1c-ExtraBold.ttf` | M PLUS Rounded 1c | M+ FONTS PROJECT | https://fonts.google.com/specimen/M+PLUS+Rounded+1c | SIL Open Font License 1.1 | 修正版・前の版 |
+| `fonts/NotoSansJP-VF.ttf` | Noto Sans JP | Google | https://fonts.google.com/noto/specimen/Noto+Sans+JP | SIL Open Font License 1.1 | テロップ再設計版 |
 
 - Pexels License・Pixabay Content License とも商用利用可・クレジット表記は任意です（素材そのものの再配布・販売は不可）
 - BGM は Pixabay で「Content ID 登録なし」の曲です
