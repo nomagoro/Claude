@@ -84,17 +84,18 @@ function Make-Title([string]$name) {
     $top = 1150; $bottom = 1480
     Draw-Panel $g $top $bottom
     Draw-Text $g 'やさしく、あたたかく。' 44 ($top + 75) $SUB
-    Draw-Text $g 'ひだまり' 104 ($top + 170) $BROWN
-    Draw-Text $g '動物病院' 72 ($top + 270) $BROWN
+    Draw-Text $g 'さくら小径' 104 ($top + 170) $BROWN
+    Draw-Text $g 'どうぶつ病院' 72 ($top + 270) $BROWN
     $bmp.Save((Join-Path $OUT "$name.png"), [System.Drawing.Imaging.ImageFormat]::Png)
     $g.Dispose(); $bmp.Dispose()
 }
 
 function Make-EndCard([string]$name) {
     $c = New-Canvas; $bmp = $c[0]; $g = $c[1]
-    $top = 820; $bottom = 1480
+    # 秋田犬が画面下側にいるので、パネルは上側（桜の部分）に置く
+    $top = 380; $bottom = 1040
     Draw-Panel $g $top $bottom
-    Draw-Text $g 'ひだまり動物病院' 76 ($top + 90) $BROWN
+    Draw-Text $g 'さくら小径どうぶつ病院' 76 ($top + 90) $BROWN
     $line = New-Object System.Drawing.Pen $CORAL, 4
     $g.DrawLine($line, $LEFT + 90, $top + 160, $RIGHT - 90, $top + 160)
     Draw-Text $g '診療時間' 38 ($top + 215) $SUB
@@ -107,9 +108,9 @@ function Make-EndCard([string]$name) {
 }
 
 Make-Title   'telop_00_title'
-Make-Caption 'telop_01_exam'   'ていねいな診察'           '気になることは何でもご相談ください'
-Make-Caption 'telop_02_listen' 'からだの声に耳をすませて' '小さな変化も見逃しません'
-Make-Caption 'telop_03_owner'  '飼い主さまと一緒に'       '納得できる治療を考えます'
-Make-Caption 'telop_04_cat'    'ねこちゃんのケアも'       'トリミング・爪切りもおまかせ'
+Make-Caption 'telop_01_town'   '街の、かかりつけ動物病院' 'お散歩のついでに、気軽にどうぞ'
+Make-Caption 'telop_02_listen' 'からだの声に耳をすませて' 'ていねいな診察を心がけています'
+Make-Caption 'telop_03_home'   'おうちでの様子も'         '気になることは何でもご相談ください'
+Make-Caption 'telop_04_cat'    'ねこちゃんもおまかせ'     '猫にやさしい診察で、ストレス少なく'
 Make-EndCard 'telop_05_endcard'
 Get-ChildItem $OUT | ForEach-Object { $_.Name }

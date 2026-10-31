@@ -4,11 +4,11 @@
 param(
     [string]$Root = (Split-Path $PSScriptRoot -Parent)
 )
-$FPS = 25; $W = 1080; $H = 1920
-$END = 750            # 30秒
+$FPS = 30; $W = 1080; $H = 1920
+$END = 900            # 30秒
 $STILL = 108000       # 静止画の公称尺
-$XFADE = 10           # カット間ディゾルブ（フレーム）
-$SEQ_NAME = 'ひだまり動物病院_紹介ショート'
+$XFADE = 12           # カット間ディゾルブ（フレーム）
+$SEQ_NAME = 'さくら小径どうぶつ病院_紹介ショート'
 
 function Esc([string]$s) { [System.Security.SecurityElement]::Escape($s) }
 function Rate { "<rate><timebase>$FPS</timebase><ntsc>FALSE</ntsc></rate>" }
@@ -21,33 +21,35 @@ $AFmt = "<samplecharacteristics><depth>16</depth><samplerate>48000</samplerate><
 
 # 素材（durは素材の長さ・フレーム、w/hは実際の解像度、scaleは1080x1920に合わせる拡大率%）
 $videos = @(
-    @{ id = 'puppies';  bin = '02'; path = 'media/01_puppies_12768731.mp4';     dur = 325; w = 720;  h = 1280; scale = 150 }
-    @{ id = 'exam';     bin = '05'; path = 'media/02_exam_6235179.mp4';         dur = 425; w = 1080; h = 1920; scale = 100 }
-    @{ id = 'listen';   bin = '05'; path = 'media/03_stethoscope_6235191_uhd.mp4'; dur = 200; w = 1440; h = 2560; scale = 75 }
-    @{ id = 'owner';    bin = '05'; path = 'media/04_with_owner_6235744.mp4';   dur = 375; w = 1080; h = 1920; scale = 100 }
-    @{ id = 'cat';      bin = '05'; path = 'media/05_cat_care_6131039.mp4';     dur = 450; w = 1080; h = 1920; scale = 100 }
-    @{ id = 'vet';      bin = '05'; path = 'media/06_vet_with_dog_6234589.mp4'; dur = 325; w = 1080; h = 1920; scale = 100 }
+    @{ id = 'sakura'; bin = '02'; path = 'media/01_sakura_stroll_31295367.mp4';   dur = 270;  w = 1080; h = 1920; scale = 100 }
+    @{ id = 'street'; bin = '02'; path = 'media/02_tokyo_street_35306935.mp4';    dur = 630;  w = 1080; h = 1920; scale = 100 }
+    @{ id = 'listen'; bin = '05'; path = 'media/03_stethoscope_6235191_uhd.mp4';  dur = 240;  w = 1440; h = 2560; scale = 100 }
+    @{ id = 'shiba';  bin = '02'; path = 'media/04_shiba_29243898.mp4';           dur = 690;  w = 1080; h = 1920; scale = 100 }
+    @{ id = 'cat';    bin = '02'; path = 'media/05_calico_cat_35486843.mp4';      dur = 2430; w = 1080; h = 1920; scale = 100 }
+    @{ id = 'akita';  bin = '02'; path = 'media/06_akita_sakura_31643071.mp4';    dur = 360;  w = 1080; h = 1920; scale = 100 }
 )
-$telops = @('telop_00_title', 'telop_01_exam', 'telop_02_listen', 'telop_03_owner', 'telop_04_cat', 'telop_05_endcard')
+$telops = @('telop_00_title', 'telop_01_town', 'telop_02_listen', 'telop_03_home', 'telop_04_cat', 'telop_05_endcard')
 $bgm = @{ id = 'bgm'; path = 'media/bgm_happy_ukulele_512480.mp3'; dur = 54 * $FPS }
 
 # V1: 本編（start, end, 素材in）
+# 聴診器（1440x2560）は獣医師の顔が映らないよう、Premiere上でスケール140%・位置Y182にして下側（犬と聴診器）だけ見せる
+# 素材の後半は犬を持ち上げて顔が入るので、前半の3秒だけ使う
 $cuts = @(
-    @{ v = 'puppies'; s = 0;   e = 100; in = 25 }
-    @{ v = 'exam';    s = 100; e = 225; in = 50 }
-    @{ v = 'listen';  s = 225; e = 350; in = 25 }
-    @{ v = 'owner';   s = 350; e = 475; in = 50 }
-    @{ v = 'cat';     s = 475; e = 600; in = 100 }
-    @{ v = 'vet';     s = 600; e = 750; in = 25 }
+    @{ v = 'sakura'; s = 0;   e = 150; in = 30 }
+    @{ v = 'street'; s = 150; e = 270; in = 60 }
+    @{ v = 'listen'; s = 270; e = 360; in = 27 }
+    @{ v = 'shiba';  s = 360; e = 540; in = 60 }
+    @{ v = 'cat';    s = 540; e = 720; in = 300 }
+    @{ v = 'akita';  s = 720; e = 900; in = 30 }
 )
 # V3: テロップ（V2は色調整用の調整レイヤーを置くために空けておく）
 $telopTimes = @(
-    @{ t = 'telop_00_title';   s = 10;  e = 95 }
-    @{ t = 'telop_01_exam';    s = 110; e = 220 }
-    @{ t = 'telop_02_listen';  s = 235; e = 345 }
-    @{ t = 'telop_03_owner';   s = 360; e = 470 }
-    @{ t = 'telop_04_cat';     s = 485; e = 595 }
-    @{ t = 'telop_05_endcard'; s = 615; e = 750 }
+    @{ t = 'telop_00_title';   s = 15;  e = 140 }
+    @{ t = 'telop_01_town';    s = 165; e = 262 }
+    @{ t = 'telop_02_listen';  s = 280; e = 354 }
+    @{ t = 'telop_03_home';    s = 375; e = 532 }
+    @{ t = 'telop_04_cat';     s = 555; e = 712 }
+    @{ t = 'telop_05_endcard'; s = 738; e = 900 }
 )
 
 function FileFull($fid, $name, $path, $dur, [switch]$Audio, [switch]$NoVideo, [int]$fw = $W, [int]$fh = $H) {
@@ -115,7 +117,7 @@ $i = 0
 foreach ($t in $telopTimes) { $v2 += SeqClip "v2-$i" "$($t.t).png" "f-$($t.t)" $STILL $t.s $t.e 0 -Still; $i++ }
 
 # BGM: 0dB → 最後の2秒でフェードアウト（Audio Levels は線形ゲイン）
-$fadeStart = $END - 50
+$fadeStart = $END - 2 * $FPS
 $levels = "<filter><effect><name>Audio Levels</name><effectid>audiolevels</effectid><effectcategory>audiolevels</effectcategory>" +
     "<effecttype>audiolevels</effecttype><mediatype>audio</mediatype><parameter><parameterid>level</parameterid><name>Level</name>" +
     "<valuemin>0</valuemin><valuemax>3.98109</valuemax><value>0.6</value>" +
